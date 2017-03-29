@@ -1,6 +1,7 @@
 var logger          = require('morgan'),
     cors            = require('cors'),
     http            = require('http'),
+    _ = require('lodash'),
     express         = require('express'),
     errorhandler    = require('errorhandler'),
     dotenv          = require('dotenv'),
@@ -28,6 +29,14 @@ var app = express();
 
 dotenv.load();
 
+
+var users = [{
+               id: 1,
+               name: 'gonto',
+               email: 'gonto',
+               password: 'gonto'
+             }];
+
 // Parsers
 // old version of line
 // app.use(bodyParser.urlencoded());
@@ -51,7 +60,7 @@ if (process.env.NODE_ENV === 'development') {
 
 
 
-
+/*
 app.get('/register', function(req, res) {
 connection.query('SELECT * from tasks LIMIT 2', function(err, rows, fields) {
 // connection.end();
@@ -64,6 +73,31 @@ connection.query('SELECT * from tasks LIMIT 2', function(err, rows, fields) {
     return res.status(200).send('error');
     }
   });
+  });*/
+
+
+
+
+  app.post('/register', function(req, res) {
+    // console.log(req);
+    if (!req.body.name || !req.body.email || !req.body.password) {
+     return  res.status(201).send({'error': "You must send the username and the password"})
+    }
+   if (_.find(users, {email: req.body.email})) {
+     return  res.status(201).send({'error': "A user with that username already exists"})
+    }
+console.log(users, req.body)
+
+    var profile = _.pick(req.body, 'name','email', 'password');
+    profile.id = _.max(users, 'id').id + 1;
+
+    users.push(profile);
+
+
+    res.status(201).send({
+     'data' : req.body
+     //id_token:  'test'; //createToken(profile)
+    });
   });
 
 

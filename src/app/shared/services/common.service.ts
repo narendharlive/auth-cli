@@ -19,7 +19,7 @@ public headers      = new Headers({ 'Content-Type': 'application/x-www-form-urle
       }
 
       register(data) {
-        return this.http.post(this.ct.apiUrl + 'register', data, {headers: this.headers}).map((res:Response) => res.json());
+        return this.http.post(this.ct.baseUrl + 'register', data).map((res:Response) => res.json());
       }
 
       postTask(data) {

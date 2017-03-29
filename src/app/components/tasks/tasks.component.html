@@ -1,0 +1,19 @@
+<p>
+  tasks works!
+</p>
+<a routerLink="/tasks/hero" routerLinkActive="active">task</a>
+<h3 class="text-center">Register Task</h3>
+<form [formGroup]="RegisterTask" novalidate class="col-sm-6 col-sm-offset-3" (ngSubmit)="RegisterTask.valid && onSubmit()">
+  <div class="form-group">
+    <label class="center-block">Task Name:
+      <input type="text" class="form-control" formControlName="task">
+    </label>
+    <input [ngClass]="{'disabled': !RegisterTask.valid}" type="submit" value="Login" class="form-control btn btn-block btn-success">
+  </div>
+</form>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <p>Form value: {{ RegisterTask.value | json }}</p>
+    <p>Form value: {{ RegisterTask.status | json }}</p>
+  </div>
+</div>

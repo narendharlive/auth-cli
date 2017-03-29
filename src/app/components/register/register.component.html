@@ -1,0 +1,28 @@
+<p>
+  register works!
+</p>
+<h3 class="text-center">Register Form</h3>
+<form [formGroup]="registerForm" novalidate class="col-sm-6 col-sm-offset-3" (ngSubmit)="registerForm.valid && onSubmit()">
+  <div class="form-group">
+    <label class="center-block">Name:
+      <input type="text" class="form-control" formControlName="name">
+    </label>
+    <label class="center-block">Email:
+      <input type="email" class="form-control" formControlName="email">
+    </label>
+    <label class="center-block">Password:
+      <input type="password" class="form-control" formControlName="password">
+    </label>
+    <input [ngClass]="{'disabled': !registerForm.valid}" type="submit" value="RegisterNow" class="form-control btn btn-block btn-success">
+  </div>
+</form>
+<div class="row">
+  <div class="alert" *ngIf="RegisterMsg" [ngClass]="{'alert-danger': RegisterMsg.error, 'alert-success': !RegisterMsg.error}">
+    {{RegisterMsg.message}}
+  </div>
+  <div class="col-sm-6 col-sm-offset-3">
+    <p>Form value: {{ registerForm.value | json }}</p>
+    <p>Form value: {{ registerForm.status | json }}</p>
+  </div>
+
+</div>

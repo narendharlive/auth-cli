@@ -86,18 +86,48 @@ connection.query('SELECT * from tasks LIMIT 2', function(err, rows, fields) {
    if (_.find(users, {email: req.body.email})) {
      return  res.status(201).send({'error': "A user with that username already exists"})
     }
-console.log(users, req.body)
+// console.log(users, req.body)
 
     var profile = _.pick(req.body, 'name','email', 'password');
     profile.id = _.max(users, 'id').id + 1;
 
     users.push(profile);
+/*    res.status(201).send({
+             'data' : 'You are Successfully Registered'
+             //id_token:  'test'; //createToken(profile)
+            });*/
+var name = req.body.name,
+email = req.body.email,
+password = req.body.password;
 
 
+connection.query('INSERT INTO users SET ?',req.body, function(err, result) {
+  if (!err) {
+    console.log(result);
+    return res.status(200).send({'data':'You are Successfully Registered'});
+   }
+  else {
+    console.log(err);
+    return res.status(200).send({'error': 'Error while performing  DB'});
+    }
+  });
+
+
+
+ /* connection.query('INSERT INTO `users`(`name`, `email`, `password`) VALUES (req.body.name, req.body.email, req.body.password)', function(err, rows, fields) {
+// connection.end();
+  if (!err) {
     res.status(201).send({
-     'data' : req.body
-     //id_token:  'test'; //createToken(profile)
-    });
+         'data' : 'You are Successfully Registered'
+         //id_token:  'test'; //createToken(profile)
+        });
+   }
+  else {
+   res.status(201).send({
+            'error' : 'Error With Database Connection'
+           });
+    }
+  });*/
   });
 
 

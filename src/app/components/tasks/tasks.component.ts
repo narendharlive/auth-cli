@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class TasksComponent implements OnInit {
   private RegisterTask: FormGroup;
   public tasks;
+  public message;
 
   constructor(private fb: FormBuilder, private cs: CommonService, private router: Router) {
     this.createRegisterTask();
@@ -42,5 +43,10 @@ export class TasksComponent implements OnInit {
   editTask(id){
     this.router.navigateByUrl('/task/' + id);
   }
+  deleteTask(id) {
+    this.cs.deleteTask(id).subscribe(result => {
+      this.message = result;
+    });
+  };
 
 }

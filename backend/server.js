@@ -147,7 +147,7 @@ app.delete('/users/:id', function(req, res) {
   var id = req.params.id;
  // console.log(id);
  // console.log(res);
-  connection.query('DELETE FROM users WHERE UID = ?', [id], function(err, rows, fields) {
+  connection.query('DELETE FROM users WHERE UID = ?', [id], function(err, fields) {
   // connection.end();
     if (!err) {
       //console.log('The solution is: ', rows);
@@ -194,12 +194,40 @@ app.post('/tasks', function(req, res) {
 
 app.get('/task/:id', function (req, res) {
   var tid = req.params.id;
-console.log(tid);
   connection.query('SELECT * FROM tasks WHERE TID = ?', [tid], function (err, rows, fields) {
    // console.log(tid, rows);
     if (!err) {
       //console.log('The solution is: ', rows);
       return res.status(200).send(rows);
+    }
+    else {
+      console.log('Error while performing Query.');
+      return res.status(200).send('error');
+    }
+  });
+});
+
+app.post('/task/:id', function (req, res) {
+  var tid = req.params.id;
+  connection.query('UPDATE tasks SET ? WHERE TID = ?', [req.body, tid], function(err, rows, fields) {
+    // connection.end();
+    if (!err) {
+      //console.log('The solution is: ', rows);
+      return res.status(200).send('task Successfully Updated');
+    }
+    else {
+      console.log('Error while performing Query.');
+      return res.status(200).send('error');
+    }
+  });
+});
+app.delete('/task/:id', function (req, res) {
+  var tid = req.params.id;
+  connection.query('DELETE FROM tasks WHERE TID = ?', [tid], function(err, fields) {
+    // connection.end();
+    if (!err) {
+      //console.log('The solution is: ', rows);
+      return res.status(200).send('Task Successfully Deleted');
     }
     else {
       console.log('Error while performing Query.');

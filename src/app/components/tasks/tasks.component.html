@@ -1,7 +1,6 @@
 <p>
   tasks works!
 </p>
-<a routerLink="/tasks/task" routerLinkActive="active">task</a>
 <h3 class="text-center">Register Task</h3>
 <form [formGroup]="RegisterTask" novalidate class="col-sm-6 col-sm-offset-3"
       (ngSubmit)="RegisterTask.valid && onSubmit()">

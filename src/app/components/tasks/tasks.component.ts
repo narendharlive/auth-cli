@@ -10,7 +10,6 @@ export class TasksComponent implements OnInit {
 private RegisterTask: FormGroup;
   constructor(private fb: FormBuilder, private cs: CommonService) {
    this.createRegisterTask();
-   cs.getTask().subscribe(result => { console.log(result)});
    }
   ngOnInit() {
   }

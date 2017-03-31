@@ -25,7 +25,7 @@ createRegisterForm(){
 };
 onSubmit() {
   const registerData = this.registerForm.value;
-  console.log(registerData);
+  // console.log(registerData);
   this.cs.register(registerData).subscribe(result => { this.RegisterMsg = result;});
 }
 }

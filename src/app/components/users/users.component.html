@@ -1,3 +1,24 @@
 <p>
   users works!
 </p>
+<div class="contaainer">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <!--<a href="javascript:void(0);" (click)="getUsers()">Get Users</a>-->
+      <table *ngIf="users" class="table table-responsive table-stripped table-bordered">
+        <tr>
+          <th>Sl no</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>UID</th>
+        </tr>
+        <tr *ngFor="let user of users; let i = index;">
+          <th>{{i+1}}</th>
+          <th>{{user.name}}</th>
+          <th>{{user.email}}</th>
+          <th>{{user.UID}}</th>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

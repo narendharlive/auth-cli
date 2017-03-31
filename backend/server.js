@@ -60,25 +60,8 @@ if (process.env.NODE_ENV === 'development') {
 
 
 
-/*
-app.get('/register', function(req, res) {
-connection.query('SELECT * from tasks LIMIT 2', function(err, rows, fields) {
-// connection.end();
-  if (!err) {
-    console.log('The solution is: ', rows);
-    return res.status(200).send(rows);
-   }
-  else {
-    console.log('Error while performing Query.');
-    return res.status(200).send('error');
-    }
-  });
-  });*/
 
-
-
-
-  app.post('/register', function(req, res) {
+app.post('/register', function(req, res) {
     // console.log(req);
     if (!req.body.name || !req.body.email || !req.body.password) {
      return  res.status(201).send({'error': "You must send the username and the password"})
@@ -130,7 +113,19 @@ connection.query('INSERT INTO users SET ?',req.body, function(err, result) {
   });*/
   });
 
-
+app.get('/users', function(req, res) {
+  connection.query('SELECT * from users LIMIT 20', function(err, rows, fields) {
+  // connection.end();
+    if (!err) {
+      //console.log('The solution is: ', rows);
+      return res.status(200).send(rows);
+     }
+    else {
+      console.log('Error while performing Query.');
+      return res.status(200).send('error');
+      }
+    });
+});
 
 /*
 app.use(require('./anonymous-routes'));

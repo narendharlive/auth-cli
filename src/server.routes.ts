@@ -9,4 +9,4 @@
  * 'home', 'about'
  * ];
  **/
-export const routes: string[] = ['home','register','login','tasks','users'];
+export const routes: string[] = ['home','register','login','tasks','task/:id' ,'users'];

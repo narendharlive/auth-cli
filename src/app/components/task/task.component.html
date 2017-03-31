@@ -1,3 +1,28 @@
 <p>
   task works!
 </p>
+
+<div class="container">
+  <table *ngIf="taskData" class="table table-responsive table-stripped table-bordered">
+    <tr>
+      <th>Task Title</th>
+      <th>Task Description</th>
+      <th>CreatedBy</th>
+      <th>Status</th>
+      <th>Task Created At</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    <tr>
+      <td>
+        <b>{{taskData.ttitle}}</b>
+      </td>
+      <td>{{taskData.tdes}}</td>
+      <td>{{taskData.tcreatedBy}}</td>
+      <td>{{taskData.sts}}</td>
+      <td>{{taskData.tcreatedAt}}</td>
+      <td><a href="javascript:void(0);" (click)="editTask()">Edit</a></td>
+      <td><a href="javascript:void(0);" (click)="deleteTask()">Delete</a></td>
+    </tr>
+  </table>
+</div>

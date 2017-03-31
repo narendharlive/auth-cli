@@ -1,19 +1,72 @@
 <p>
   tasks works!
 </p>
-<a routerLink="/tasks/hero" routerLinkActive="active">task</a>
+<a routerLink="/tasks/task" routerLinkActive="active">task</a>
 <h3 class="text-center">Register Task</h3>
-<form [formGroup]="RegisterTask" novalidate class="col-sm-6 col-sm-offset-3" (ngSubmit)="RegisterTask.valid && onSubmit()">
+<form [formGroup]="RegisterTask" novalidate class="col-sm-6 col-sm-offset-3"
+      (ngSubmit)="RegisterTask.valid && onSubmit()">
   <div class="form-group">
-    <label class="center-block">Task Name:
-      <input type="text" class="form-control" formControlName="task">
-    </label>
-    <input [ngClass]="{'disabled': !RegisterTask.valid}" type="submit" value="Login" class="form-control btn btn-block btn-success">
+    <label class="center-block">Task Title:</label>
+    <input type="text" placeholder="Task Title here" class="form-control" formControlName="ttitle">
+  </div>
+  <div class="form-group">
+    <label class="center-block">Task Description:</label>
+    <textarea placeholder="Task Description here" class="form-control" formControlName="tdes"></textarea>
+  </div>
+  <div class="form-group row">
+    <div class="col-xs-6"><label class="center-block">Task Status:</label>
+      <select formControlName="sts" class="form-control">
+        <option value="">-- Select --</option>
+        <option value="0">Disable</option>
+        <option value="1">Enable</option>
+      </select>
+    </div>
+    <div class="col-xs-6">
+      <label class="center-block">Task By:</label>
+      <select formControlName="tcreatedBy" class="form-control">
+        <option value="">-- Select --</option>
+        <option value="Admin">Admin</option>
+        <option value="User">User</option>
+        <option value="Visitor">Visitor</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <input [ngClass]="{'disabled': !RegisterTask.valid}" type="submit" value="Login"
+           class="form-control btn btn-block btn-success">
   </div>
 </form>
+<!--
 <div class="row">
   <div class="col-sm-6 col-sm-offset-3">
     <p>Form value: {{ RegisterTask.value | json }}</p>
     <p>Form value: {{ RegisterTask.status | json }}</p>
   </div>
 </div>
+-->
+<div class="container">
+  <table *ngIf="tasks" class="table table-responsive table-stripped table-bordered">
+    <tr>
+      <th>Sl no</th>
+      <th>Task Details</th>
+      <th>CreatedBy</th>
+      <th>Status</th>
+      <th>Task Created At</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    <tr *ngFor="let task of tasks; let i = index;">
+      <td>{{i+1}}</td>
+      <td>
+        <b>{{task.ttitle}}</b>
+        <p>{{task.tdes}}</p>
+      </td>
+      <td>{{task.tcreatedBy}}</td>
+      <td>{{task.sts}}</td>
+      <td>{{task.tcreatedAt}}</td>
+      <td><a href="javascript:void(0);" (click)="editTask(task.TID)">Edit</a></td>
+      <td><a href="javascript:void(0);" (click)="deleteTask(task.TID)">Delete</a></td>
+    </tr>
+  </table>
+</div>
+

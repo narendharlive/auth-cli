@@ -127,6 +127,94 @@ app.get('/users', function(req, res) {
     });
 });
 
+app.put('/users/:id', function(req, res) {
+var id = req.params.id;
+  connection.query('UPDATE users SET ? WHERE UID = ?', [req.body, id], function(err, rows, fields) {
+  // connection.end();
+    if (!err) {
+      //console.log('The solution is: ', rows);
+      return res.status(200).send('You Are Successfully Updated');
+     }
+    else {
+      console.log('Error while performing Query.');
+      return res.status(200).send('error');
+      }
+    });
+});
+
+
+app.delete('/users/:id', function(req, res) {
+  var id = req.params.id;
+ // console.log(id);
+ // console.log(res);
+  connection.query('DELETE FROM users WHERE UID = ?', [id], function(err, rows, fields) {
+  // connection.end();
+    if (!err) {
+      //console.log('The solution is: ', rows);
+      return res.status(200).send('You Are Successfully Updated');
+     }
+    else {
+      console.log('Error while performing Query.');
+      return res.status(200).send('error');
+      }
+    });
+});
+
+
+
+
+
+app.get('/tasks', function(req, res) {
+  connection.query('SELECT * from tasks LIMIT 20', function(err, rows, fields) {
+    // connection.end();
+    if (!err) {
+      console.log('The solution is: ', rows);
+      return res.status(200).send(rows);
+    }
+    else {
+      console.log('Error while performing Query.');
+      return res.status(200).send('error');
+    }
+  });
+});
+
+app.post('/tasks', function(req, res) {
+    connection.query('INSERT INTO tasks SET ?',req.body, function(err, result) {
+    if (!err) {
+      console.log(result);
+      return res.status(200).send({'data':'Task Created Successfully'});
+    }
+    else {
+      console.log(err);
+      return res.status(200).send({'error': 'Error while performing  DB'});
+    }
+  });
+
+});
+
+app.get('/task/:id', function (req, res) {
+  var tid = req.params.id;
+console.log(tid);
+  connection.query('SELECT * FROM tasks WHERE TID = ?', [tid], function (err, rows, fields) {
+   // console.log(tid, rows);
+    if (!err) {
+      //console.log('The solution is: ', rows);
+      return res.status(200).send(rows);
+    }
+    else {
+      console.log('Error while performing Query.');
+      return res.status(200).send('error');
+    }
+  });
+});
+
+
+
+
+
+
+
+
 /*
 app.use(require('./anonymous-routes'));
 app.use(require('./protected-routes'));

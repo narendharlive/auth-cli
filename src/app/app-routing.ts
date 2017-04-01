@@ -6,7 +6,8 @@ import  {
   LoginComponent,
   TasksComponent,
   UsersComponent,
-  TaskComponent
+  TaskComponent,
+  PagenotfoundComponent
 } from './components';
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'tasks', component: TasksComponent},
   {path: 'task/:id', component: TaskComponent},
-  {path: 'users', component: UsersComponent}
+  {path: 'users', component: UsersComponent},
+  {path: '**', component: PagenotfoundComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

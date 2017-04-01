@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CommonService } from '../../shared/service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {CommonService} from '../../shared/service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'tasks',
@@ -29,7 +29,7 @@ export class TasksComponent implements OnInit {
       tcreatedBy: ['admin', Validators.required],
       tdes: ['', Validators.required]
 
-  });
+    });
   };
 
   onSubmit() {
@@ -40,16 +40,17 @@ export class TasksComponent implements OnInit {
 
   }
 
-  editTask(id){
+  editTask(id) {
     let tid = this.tasks[id].TID;
     this.router.navigateByUrl('task/' + tid);
   }
+
   deleteTask(id) {
     let tid = this.tasks[id].TID;
     this.cs.deleteTask(tid).subscribe(result => {
       this.message = result;
-      if(result && !result.error){
-        setTimeout(() => this.tasks.splice(id,1), 1000);
+      if (result && !result.error) {
+        setTimeout(() => this.tasks.splice(id, 1), 1000);
       }
     });
   };

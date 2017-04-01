@@ -6,35 +6,42 @@
  * client.ts and server.ts
  */
 
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule, JsonpModule } from '@angular/http';
-import { UniversalModule } from 'angular2-universal';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AppComponent} from './index';
-import {HomeComponent,RegisterComponent,LoginComponent,TasksComponent,UsersComponent,TaskComponent } from './components';
-import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from './app-routing';
-import { Constants } from './shared/constants';
-import { CommonService } from './shared/service';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {HttpModule, JsonpModule} from '@angular/http';
+import {UniversalModule} from 'angular2-universal';
+import {ReactiveFormsModule} from '@angular/forms';
+import {AppComponent} from './index';
+import {
+  HomeComponent,
+  RegisterComponent,
+  LoginComponent,
+  TasksComponent,
+  UsersComponent,
+  TaskComponent
+} from './components';
+import {RouterModule} from '@angular/router';
+import {AppRoutingModule} from './app-routing';
+import {Constants} from './shared/constants';
+import {CommonService} from './shared/service';
 
 /**
  * Top-level NgModule "container"
  */
 @NgModule({
   /** Root App Component */
-  bootstrap: [ AppComponent ],
+  bootstrap: [AppComponent],
   /** Our Components */
-  declarations: [ AppComponent, HomeComponent,RegisterComponent,LoginComponent,TasksComponent,UsersComponent, TaskComponent],
+  declarations: [AppComponent, HomeComponent, RegisterComponent, LoginComponent, TasksComponent, UsersComponent, TaskComponent],
   imports: [
     /**
      * NOTE: Needs to be your first import (!)
      * NodeModule, NodeHttpModule, NodeJsonpModule are included
      */
-     BrowserModule,
-     HttpModule,
-         JsonpModule,
-     AppRoutingModule,
+    BrowserModule,
+    HttpModule,
+    JsonpModule,
+    AppRoutingModule,
     UniversalModule,
     ReactiveFormsModule
     /**

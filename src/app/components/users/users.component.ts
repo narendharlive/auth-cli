@@ -29,8 +29,8 @@ export class UsersComponent implements OnInit {
     let uid = this.users[id].UID;
     this.cs.deleteUser(uid).subscribe(result => {
       this.message = result;
-      if(result && !result.error){
-       setTimeout(() => this.users.splice(id,1), 1000);
+      if (result && !result.error) {
+        setTimeout(() => this.users.splice(id, 1), 1000);
       }
     });
   }

@@ -10,18 +10,19 @@
     <label class="center-block">Password:
       <input type="password" class="form-control" formControlName="password">
     </label>
-    <input [ngClass]="{'disabled': !loginForm.valid}" type="submit" value="Login" class="form-control btn btn-block btn-success">
+    <input [ngClass]="{'disabled': !loginForm.valid}" type="submit" value="Login"
+           class="form-control btn btn-block btn-success">
   </div>
 </form>
 <div class="row">
   <div class="alert" *ngIf="LoginMsg" [ngClass]="{'alert-danger': LoginMsg.error, 'alert-success': !LoginMsg.error}">
-    <p *ngIf="LoginMsg.error" >{{LoginMsg.message}}</p>
-  <ul *ngIf="!LoginMsg.error" class="list-unstyled">
-    <li>Name: {{LoginMsg.name}}</li>
-    <li>Email: {{LoginMsg.email}}</li>
-    <li>Token: {{LoginMsg.apiKey}}</li>
-    <li>Created At: {{LoginMsg.createdAt}}</li>
-  </ul>
+    <p *ngIf="LoginMsg.error">{{LoginMsg.message}}</p>
+    <ul *ngIf="!LoginMsg.error" class="list-unstyled">
+      <li>Name: {{LoginMsg.name}}</li>
+      <li>Email: {{LoginMsg.email}}</li>
+      <li>Token: {{LoginMsg.apiKey}}</li>
+      <li>Created At: {{LoginMsg.createdAt}}</li>
+    </ul>
   </div>
   <div class="col-sm-6 col-sm-offset-3">
     <p>Form value: {{ loginForm.value | json }}</p>

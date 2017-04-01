@@ -51,6 +51,7 @@ export class CommonService {
   updateTask(tid, data) {
     return this.http.post(this.ct.baseUrl + 'task/' + tid, data).map((res: Response) => res.json());
   }
+
   deleteTask(tid) {
     return this.http.delete(this.ct.baseUrl + 'task/' + tid).map((res: Response) => res.json());
   }

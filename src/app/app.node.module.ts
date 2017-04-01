@@ -19,6 +19,7 @@ import {
   TasksComponent,
   UsersComponent,
   TaskComponent,
+  TaskEditComponent,
   PagenotfoundComponent
 } from './components';
 import {RouterModule} from '@angular/router';
@@ -33,7 +34,7 @@ import {CommonService} from './shared/service';
   /** Root App Component */
   bootstrap: [AppComponent],
   /** Our Components */
-  declarations: [AppComponent, HomeComponent, RegisterComponent, LoginComponent, TasksComponent, UsersComponent, TaskComponent, PagenotfoundComponent],
+  declarations: [AppComponent, HomeComponent, RegisterComponent, LoginComponent, TasksComponent, UsersComponent, TaskComponent, PagenotfoundComponent, TaskEditComponent],
   imports: [
     /**
      * NOTE: Needs to be your first import (!)

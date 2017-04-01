@@ -1,43 +1,54 @@
 <p>
   tasks works!
 </p>
-<h3 class="text-center">Register Task</h3>
-<form [formGroup]="RegisterTask" novalidate class="col-sm-6 col-sm-offset-3"
-      (ngSubmit)="RegisterTask.valid && onSubmit()">
-  <div class="form-group">
-    <label class="center-block">Task Title:</label>
-    <input type="text" placeholder="Task Title here" class="form-control" formControlName="ttitle">
+<div class="container">
+  <div class="row" *ngIf="!editTaskStatus">
+    <h3 class="text-center">Register Task</h3>
+    <form [formGroup]="RegisterTask" novalidate class="col-sm-6 col-sm-offset-3"
+          (ngSubmit)="RegisterTask.valid && onSubmit()">
+      <div class="form-group">
+        <label class="center-block">Task Title:</label>
+        <input type="text" placeholder="Task Title here" class="form-control" formControlName="ttitle">
+      </div>
+      <div class="form-group">
+        <label class="center-block">Task Description:</label>
+        <textarea placeholder="Task Description here" class="form-control" formControlName="tdes"></textarea>
+      </div>
+      <div class="form-group row">
+        <div class="col-xs-6"><label class="center-block">Task Status:</label>
+          <select formControlName="sts" class="form-control">
+            <option value="">-- Select --</option>
+            <option value="0">Disable</option>
+            <option value="1">Enable</option>
+          </select>
+        </div>
+        <div class="col-xs-6">
+          <label class="center-block">Task By:</label>
+          <select formControlName="tcreatedBy" class="form-control">
+            <option value="">-- Select --</option>
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+            <option value="Visitor">Visitor</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <input [ngClass]="{'disabled': !RegisterTask.valid}" type="submit" value="Create Task"
+               class="form-control btn btn-block btn-success">
+      </div>
+    </form>
   </div>
-  <div class="form-group">
-    <label class="center-block">Task Description:</label>
-    <textarea placeholder="Task Description here" class="form-control" formControlName="tdes"></textarea>
+  <div class="row" *ngIf="editTaskStatus">
+    <task-edit class="col-xs-12" [taskData]="taskData" (onSubmited)="onSubmited($event)"
+               (getMessage)="getMessage($event)"></task-edit>
   </div>
-  <div class="form-group row">
-    <div class="col-xs-6"><label class="center-block">Task Status:</label>
-      <select formControlName="sts" class="form-control">
-        <option value="">-- Select --</option>
-        <option value="0">Disable</option>
-        <option value="1">Enable</option>
-      </select>
+  <div class="row">
+    <div class="alert col-xs-12" *ngIf="message" [ngClass]="{'alert-danger': message.error, 'alert-success': !message.error}">
+      {{message.message}}
     </div>
-    <div class="col-xs-6">
-      <label class="center-block">Task By:</label>
-      <select formControlName="tcreatedBy" class="form-control">
-        <option value="">-- Select --</option>
-        <option value="Admin">Admin</option>
-        <option value="User">User</option>
-        <option value="Visitor">Visitor</option>
-      </select>
-    </div>
   </div>
-  <div class="form-group">
-    <input [ngClass]="{'disabled': !RegisterTask.valid}" type="submit" value="Create Task"
-           class="form-control btn btn-block btn-success">
-  </div>
-</form>
-<div class="alert" *ngIf="message" [ngClass]="{'alert-danger': message.error, 'alert-success': !message.error}">
-  {{message.message}}
 </div>
+
 <!--
 <div class="row">
   <div class="col-sm-6 col-sm-offset-3">

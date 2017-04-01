@@ -11,6 +11,8 @@ export class TasksComponent implements OnInit {
   private RegisterTask: FormGroup;
   public tasks;
   public message;
+  public taskData;
+  public editTaskStatus = false;
 
   constructor(private fb: FormBuilder, private cs: CommonService, private router: Router) {
     this.createRegisterTask();
@@ -33,8 +35,8 @@ export class TasksComponent implements OnInit {
   };
 
   onSubmit() {
-    const taskData = this.RegisterTask.value;
-    this.cs.postTask(taskData).subscribe(result => {
+    const data = this.RegisterTask.value;
+    this.cs.postTask(data).subscribe(result => {
       this.message = result;
     });
 
@@ -42,7 +44,21 @@ export class TasksComponent implements OnInit {
 
   editTask(id) {
     let tid = this.tasks[id].TID;
-    this.router.navigateByUrl('task/' + tid);
+    this.taskData = this.tasks[id];
+    this.editTaskStatus = true;
+    // this.router.navigateByUrl('task/' + tid);
+  }
+
+  onSubmited(data){
+    let list = ['ttitle', 'tdes', 'sts'];
+    const xx = data;
+    for (let i in list) {
+      this.taskData[list[i]] = xx[list[i]];
+    }
+    this.editTaskStatus = false;
+  }
+  getMessage(data){
+    this.message =  data;
   }
 
   deleteTask(id) {

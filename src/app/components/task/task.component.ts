@@ -1,5 +1,5 @@
 import {Router, ActivatedRoute, Params} from '@angular/router';
-import {OnInit, OnDestroy, Component} from '@angular/core';
+import {OnInit,  Component} from '@angular/core';
 import {FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {CommonService} from '../../shared/service';
 
@@ -14,7 +14,6 @@ export class TaskComponent implements OnInit {
 
   public tid: number;
   public taskData;
-  public editTaskGroup: FormGroup;
   public editTaskStatus = false;
   public message;
 
@@ -30,31 +29,18 @@ export class TaskComponent implements OnInit {
 
   editTask() {
     this.editTaskStatus = true;
-    this.editTaskGroup = this.fb.group({
-      ttitle: [this.taskData.ttitle, Validators.required],
-      sts: [this.taskData.sts, Validators.required],
-      tdes: [this.taskData.tdes, Validators.required]
-
-    });
   };
 
-  onSubmit() {
-    this.cs.updateTask(this.tid, this.editTaskGroup.value).subscribe(result => {
-      this.message = result;
-      if (result && !result.error) {
-        setTimeout(() => {
-          let list = ['ttitle', 'tdes', 'sts'];
-          for (let i in list) {
-            this.taskData[list[i]] = this.editTaskGroup.value[list[i]];
-          }
-          /*this.taskData.ttitle = this.editTaskGroup.value.ttitle;
-           this.taskData.tdes = this.editTaskGroup.value.tdes;
-           this.taskData.sts = this.editTaskGroup.value.sts;*/
-
-        }, 1000);
-      }
-    });
-  };
+  onSubmited(data){
+    let list = ['ttitle', 'tdes', 'sts'];
+    let x = data;
+    for (let i in list) {
+      this.taskData[list[i]] = x[list[i]];
+     }
+  }
+  getMessage(data){
+    this.message =  data;
+  }
 
   deleteTask() {
     this.cs.deleteTask(this.tid).subscribe(result => {

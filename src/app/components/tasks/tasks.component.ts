@@ -41,11 +41,16 @@ export class TasksComponent implements OnInit {
   }
 
   editTask(id){
-    this.router.navigateByUrl('/task/' + id);
+    let tid = this.tasks[id].TID;
+    this.router.navigateByUrl('task/' + tid);
   }
   deleteTask(id) {
-    this.cs.deleteTask(id).subscribe(result => {
+    let tid = this.tasks[id].TID;
+    this.cs.deleteTask(tid).subscribe(result => {
       this.message = result;
+      if(result && !result.error){
+        setTimeout(() => this.tasks.splice(id,1), 1000);
+      }
     });
   };
 

@@ -9,7 +9,7 @@ import {CommonService} from '../../shared/service';
 })
 export class TaskComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private cs: CommonService) {
+  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private cs: CommonService, private router: Router) {
   }
 
   public tid: number;
@@ -37,15 +37,31 @@ export class TaskComponent implements OnInit {
 
     });
   };
-  onSubmit(){
+
+  onSubmit() {
     this.cs.updateTask(this.tid, this.editTaskGroup.value).subscribe(result => {
       this.message = result;
+      if (result && !result.error) {
+        setTimeout(() => {
+          let list = ['ttitle', 'tdes', 'sts'];
+          for (let i in list) {
+            this.taskData[list[i]] = this.editTaskGroup.value[list[i]];
+          }
+          /*this.taskData.ttitle = this.editTaskGroup.value.ttitle;
+           this.taskData.tdes = this.editTaskGroup.value.tdes;
+           this.taskData.sts = this.editTaskGroup.value.sts;*/
+
+        }, 1000);
+      }
     });
   };
 
   deleteTask() {
     this.cs.deleteTask(this.tid).subscribe(result => {
       this.message = result;
+      if (result && !result.error) {
+        setTimeout(() => this.router.navigateByUrl('tasks'), 1000);
+      }
     });
   };
 

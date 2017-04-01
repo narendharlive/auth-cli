@@ -38,6 +38,9 @@ export class TasksComponent implements OnInit {
     const data = this.RegisterTask.value;
     this.cs.postTask(data).subscribe(result => {
       this.message = result;
+      if (result && !result.error) {
+        setTimeout(() => this.tasks.push(data), 1000);
+      }
     });
 
   }

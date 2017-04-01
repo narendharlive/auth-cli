@@ -2,24 +2,24 @@
   users works!
 </p>
 <div class="container">
-    <!--<a href="javascript:void(0);" (click)="getUsers()">Get Users</a>-->
+  <!--<a href="javascript:void(0);" (click)="getUsers()">Get Users</a>-->
   {{message}}
-    <table *ngIf="users" class="table table-responsive table-stripped table-bordered">
-      <tr>
-        <th>Sl no</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>UID</th>
-        <th>Edit</th>
-        <th>Delete</th>
-      </tr>
-      <tr *ngFor="let user of users; let i = index;">
-        <th>{{i+1}}</th>
-        <th>{{user.name}}</th>
-        <th>{{user.email}}</th>
-        <th>{{user.UID}}</th>
-        <th><a href="javascript:void(0);" (click)="updateUser(user.UID)">Edit</a></th>
-        <th><a href="javascript:void(0);" (click)="deleteUser(user.UID)">Delete</a></th>
-      </tr>
-    </table>
+  <table *ngIf="users" class="table table-responsive table-stripped table-bordered">
+    <tr>
+      <th>Sl no</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>UID</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    <tr *ngFor="let user of users; let i = index;">
+      <th>{{i+1}}</th>
+      <th>{{user.name}}</th>
+      <th>{{user.email}}</th>
+      <th>{{user.UID}}</th>
+      <th><a href="javascript:void(0);" (click)="updateUser(user.UID)">Edit</a></th>
+      <th><a href="javascript:void(0);" (click)="deleteUser(user.UID)">Delete</a></th>
+    </tr>
+  </table>
 </div>

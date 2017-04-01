@@ -31,10 +31,13 @@
     </div>
   </div>
   <div class="form-group">
-    <input [ngClass]="{'disabled': !RegisterTask.valid}" type="submit" value="Login"
+    <input [ngClass]="{'disabled': !RegisterTask.valid}" type="submit" value="Create Task"
            class="form-control btn btn-block btn-success">
   </div>
 </form>
+<div class="alert" *ngIf="message" [ngClass]="{'alert-danger': message.error, 'alert-success': !message.error}">
+  {{message.message}}
+</div>
 <!--
 <div class="row">
   <div class="col-sm-6 col-sm-offset-3">

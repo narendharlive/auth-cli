@@ -49,6 +49,8 @@
              class="form-control btn btn-block btn-success">
     </div>
   </form>
-  <div *ngIf="message" class="alert alert-success">{{message}}</div>
+  <div class="alert" *ngIf="message" [ngClass]="{'alert-danger': message.error, 'alert-success': !message.error}">
+    {{message.message}}
+  </div>
 
 </div>

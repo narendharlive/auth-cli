@@ -35,7 +35,7 @@ export class TasksComponent implements OnInit {
   onSubmit() {
     const taskData = this.RegisterTask.value;
     this.cs.postTask(taskData).subscribe(result => {
-      console.log(result)
+      this.message = result;
     });
 
   }

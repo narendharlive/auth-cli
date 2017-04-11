@@ -9,6 +9,7 @@ import  {
   TaskComponent,
   PagenotfoundComponent
 } from './components';
+import { AuthGuard } from './common/auth.guard';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'home', redirectTo: '', pathMatch: 'full'},
@@ -16,7 +17,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'tasks', component: TasksComponent},
   {path: 'task/:id', component: TaskComponent},
-  {path: 'users', component: UsersComponent},
+  {path: 'users', component: UsersComponent, canActivate: [AuthGuard]},
   {path: '**', component: PagenotfoundComponent}
 ];
 @NgModule({

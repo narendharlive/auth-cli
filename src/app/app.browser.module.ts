@@ -26,7 +26,8 @@ import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing';
 import {Constants} from './shared/constants';
 import {CommonService} from './shared/service';
-
+import { AUTH_PROVIDERS } from 'angular2-jwt';
+import { AuthGuard } from './common/auth.guard';
 /**
  * Top-level NgModule "container"
  */
@@ -51,7 +52,7 @@ import {CommonService} from './shared/service';
      */
 
   ],
-  providers: [Constants, CommonService]
+  providers: [Constants, CommonService, AuthGuard, AUTH_PROVIDERS]
 })
 export class AppModule {
 

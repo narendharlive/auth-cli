@@ -8,6 +8,7 @@
 /node_modules
 /bower_components
 /backend/node_modules/*
+/backend1
 
 # IDEs and editors
 /.idea

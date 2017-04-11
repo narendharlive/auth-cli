@@ -5,7 +5,8 @@ var logger = require('morgan'),
   express = require('express'),
   errorhandler = require('errorhandler'),
   dotenv = require('dotenv'),
-  bodyParser = require('body-parser');
+  bodyParser = require('body-parser'),
+  jwt = require('jsonwebtoken');
 
 var mysql = require('mysql');
 var connection = mysql.createConnection({
@@ -55,7 +56,31 @@ if (process.env.NODE_ENV === 'development') {
   app.use(express.logger('dev'));
   app.use(errorhandler())
 }
+var config = {
+  "secret": "ngEurope rocks!"
+};
 
+function createToken(user) {
+  return jwt.sign(_.omit(user, 'password'), config.secret, {expiresInMinutes: 60 * 5});
+}
+
+
+app.post('/sessions/create', function (req, res) {
+  if (!req.body.email || !req.body.password) {
+    return res.status(201).send(lVDE)
+  }
+  var user = _.find(users, {email: req.body.email});
+  if (!user) {
+    return res.status(401).send("The username or password don't match");
+  }
+
+  if (!(user.password === req.body.password)) {
+    return res.status(401).send(lE);
+  }
+  var msg = lS;
+  msg.id_token = createToken(user);
+  return res.status(200).send(msg);
+});
 
 app.post('/register', function (req, res) {
   // console.log(req);
@@ -71,10 +96,8 @@ app.post('/register', function (req, res) {
   profile.id = _.max(users, 'id').id + 1;
 
   users.push(profile);
-  /*    res.status(201).send({
-   'data' : 'You are Successfully Registered'
-   //id_token:  'test'; //createToken(profile)
-   });*/
+
+
   var name = req.body.name,
     email = req.body.email,
     password = req.body.password;
@@ -83,11 +106,13 @@ app.post('/register', function (req, res) {
   connection.query('INSERT INTO users SET ?', req.body, function (err, result) {
     if (!err) {
       console.log(result);
-      return res.status(200).send(ruS);
+      var msg = ruS;
+      msg.id_token = createToken(profile);
+      return res.status(200).send(msg);
     }
     else {
       console.log(err);
-      if(err.errno == 1062) return res.status(200).send(ruD);
+      if (err.errno == 1062) return res.status(200).send(ruD);
 
       return res.status(200).send(opps);
 
@@ -254,6 +279,10 @@ var opps = {'error': true, message: '!Oops Comthing Went Wrong, Please try again
   ruD = {'error': true, message: 'This email already Exists'},
   ruUS = {'error': false, message: 'Your Details Updated Successfully'},
   ruDS = {'error': false, message: 'User Deleted Successfully'},
+
+  lS = {'error': false, message: 'You are Logged in SuccessFully'},
+  lE = {'error': true, message: "The username or password don't match"},
+  lVDE = {'error': true, message: "You must send the username and the password"},
 
   trS = {'error': false, message: 'Task Successfully Created'},
   tuS = {'error': false, message: 'Task Successfully Updated'},

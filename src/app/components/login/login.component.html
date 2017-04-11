@@ -2,7 +2,8 @@
   login works!
 </p>
 <h3 class="text-center">Login Form</h3>
-<form [formGroup]="loginForm" novalidate class="col-sm-6 col-sm-offset-3" (ngSubmit)="loginForm.valid && onSubmit()">
+<form [formGroup]="loginForm" novalidate class="col-sm-6 col-sm-offset-3"
+      (ngSubmit)="loginForm.valid && onSubmit($event)">
   <div class="form-group">
     <label class="center-block">Email:
       <input type="email" class="form-control" formControlName="email">
@@ -15,17 +16,7 @@
   </div>
 </form>
 <div class="row">
-  <div class="alert" *ngIf="LoginMsg" [ngClass]="{'alert-danger': LoginMsg.error, 'alert-success': !LoginMsg.error}">
-    <p *ngIf="LoginMsg.error">{{LoginMsg.message}}</p>
-    <ul *ngIf="!LoginMsg.error" class="list-unstyled">
-      <li>Name: {{LoginMsg.name}}</li>
-      <li>Email: {{LoginMsg.email}}</li>
-      <li>Token: {{LoginMsg.apiKey}}</li>
-      <li>Created At: {{LoginMsg.createdAt}}</li>
-    </ul>
-  </div>
-  <div class="col-sm-6 col-sm-offset-3">
-    <p>Form value: {{ loginForm.value | json }}</p>
-    <p>Form value: {{ loginForm.status | json }}</p>
+  <div class="alert" *ngIf="message" [ngClass]="{'alert-danger': message.error, 'alert-success': !message.error}">
+    {{message.message}}
   </div>
 </div>

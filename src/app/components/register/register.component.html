@@ -3,7 +3,7 @@
 </p>
 <h3 class="text-center">Register Form</h3>
 <form [formGroup]="registerForm" novalidate class="col-sm-6 col-sm-offset-3"
-      (ngSubmit)="registerForm.valid && onSubmit()">
+      (ngSubmit)="registerForm.valid && onSubmit($event)">
   <div class="form-group">
     <label class="center-block">Name:
       <input type="text" class="form-control" formControlName="name">

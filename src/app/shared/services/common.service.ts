@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
+import {contentHeaders} from '../../common/headers';
 
 import {Observable} from 'rxjs/Observable';
 import {of}         from 'rxjs/observable/of';
@@ -17,11 +18,11 @@ export class CommonService {
   }
 
   login(data) {
-    return this.http.post(this.ct.baseUrl + 'login', data, {headers: this.headers}).map((res: Response) => res.json());
+    return this.http.post(this.ct.baseUrl + 'sessions/create', data, {headers: contentHeaders}).map((res: Response) => res.json());
   }
 
   register(data) {
-    return this.http.post(this.ct.baseUrl + 'register', data).map((res: Response) => res.json());
+    return this.http.post(this.ct.baseUrl + 'register', data, {headers: contentHeaders}).map((res: Response) => res.json());
   }
 
   getUsers() {

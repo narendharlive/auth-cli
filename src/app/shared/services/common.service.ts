@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {contentHeaders} from '../../common/headers';
+import { AuthHttp } from 'angular2-jwt';
 
 import {Observable} from 'rxjs/Observable';
 import {of}         from 'rxjs/observable/of';
@@ -14,7 +15,7 @@ import {Constants} from '../constants';
 export class CommonService {
   public headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
 
-  constructor(private http: Http, private ct: Constants) {
+  constructor(private http: Http, private ct: Constants, private authHttp: AuthHttp) {
   }
 
   login(data) {
@@ -26,7 +27,8 @@ export class CommonService {
   }
 
   getUsers() {
-    return this.http.get(this.ct.baseUrl + 'users').map((res: Response) => res.json());
+    //return this.http.get(this.ct.baseUrl + 'users', {headers: contentHeaders}).map((res: Response) => res.json());
+    return this.authHttp.get(this.ct.baseUrl + 'users', {headers: contentHeaders}).map((res: Response) => res.json());
   }
 
   updateUser(id) {

@@ -137,19 +137,6 @@ app.post('/register', function (req, res) {
    });*/
 });
 
-app.get('/users', function (req, res) {
-  connection.query('SELECT * from users LIMIT 20', function (err, rows, fields) {
-    // connection.end();
-    if (!err) {
-      //console.log('The solution is: ', rows);
-      return res.status(200).send(rows);
-    }
-    else {
-      console.log('Error while performing Query.');
-      return res.status(200).send(opps);
-    }
-  });
-});
 
 app.put('/users/:id', function (req, res) {
   var id = req.params.id;
@@ -259,9 +246,9 @@ app.delete('/task/:id', function (req, res) {
 
 
 /*
- app.use(require('./anonymous-routes'));
+ app.use(require('./anonymous-routes')); */
  app.use(require('./protected-routes'));
- app.use(require('./user-routes'));
+/* app.use(require('./user-routes'));
  */
 
 var port = process.env.PORT || 4201;

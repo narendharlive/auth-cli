@@ -11,6 +11,7 @@ import { enableProdMode } from '@angular/core';
 import { AppModule } from './app/app.node.module';
 import { environment } from './environments/environment';
 import { routes } from './server.routes';
+import { api } from './api.data';
 
 // App
 
@@ -45,7 +46,7 @@ app.use('/', express.static(path.join(ROOT, 'client'), {index: false}));
 /**
  * place your api routes here
  */
-// app.use('/api', api);
+ app.use('/api', api);
 
 /**
  * bootstrap universal app

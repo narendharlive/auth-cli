@@ -25,7 +25,7 @@ export class CommonService {
   }
 
   getUsers() {
-    return this.http.get(this.ct.baseUrl + 'users').map((res: Response) => res.json());
+    return this.http.get('/api/' + 'users').map((res: Response) => res.json());
   }
 
   updateUser(id) {
@@ -37,11 +37,11 @@ export class CommonService {
   }
 
   postTask(data) {
-    return this.http.post(this.ct.baseUrl + 'tasks', data).map((res: Response) => res.json());
+    return this.http.post('/api/' + 'tasks', data).map((res: Response) => res.json());
   }
 
   getTasks() {
-    return this.http.get(this.ct.baseUrl + 'tasks').map((res: Response) => res.json());
+    return this.http.get('/api/' + 'tasks').map((res: Response) => res.json());
   }
 
   getTask(tid) {

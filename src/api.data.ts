@@ -29,6 +29,7 @@ export function tasks(req: any, res: any) {
       return res.status(200).send(rows);
     }
     else {
+      console.log(err);
       return res.status(200).send('Error while performing Query.');
     }
   });
@@ -45,6 +46,7 @@ export function users(req: any, res: any) {
       return res.status(200).send(rows);
     }
     else {
+      console.log(err);
       return res.status(200).send('Error while performing Query.');
     }
   });

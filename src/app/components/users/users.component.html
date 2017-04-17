@@ -5,6 +5,9 @@
   <div class="alert" *ngIf="message" [ngClass]="{'alert-danger': message.error, 'alert-success': !message.error}">
     {{message.message}}
   </div>
+
+  <button (click)="getUsers();" class="btn btn-success">Get Users</button>
+
   <table *ngIf="users" class="table table-responsive table-stripped table-bordered">
     <tr>
       <th>Sl no</th>

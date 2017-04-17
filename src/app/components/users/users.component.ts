@@ -10,14 +10,15 @@ export class UsersComponent implements OnInit {
   public message;
 
   constructor(private cs: CommonService) {
-    this.cs.getUsers().subscribe(result => {
+    /*this.cs.getUsers().subscribe(result => {
       this.users = result;
-    });
+    });*/
   }
-
-  /*getUsers(){
-   this.cs.getUsers().subscribe(result => { this.users = result;});
-   }*/
+ getUsers(){
+   this.cs.getUsers().subscribe(result => {
+   this.users = result;
+   });
+   }
 
   updateUser(id) {
     this.cs.updateUser(id).subscribe(result => {
